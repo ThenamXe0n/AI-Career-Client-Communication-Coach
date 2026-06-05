@@ -11,3 +11,8 @@ export const generateToken = (
     }
   );
 };
+
+
+export const verifyToken = (token: string) => {
+  return jwt.verify(token, process.env.JWT_SECRET!);
+};

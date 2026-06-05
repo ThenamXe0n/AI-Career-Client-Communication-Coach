@@ -1,8 +1,9 @@
 import { apiResponse } from "../../../shared/utils/api-response";
 import { AuthService } from "../application/auth.service";
+import { Request, Response } from "express";
 
 export class AuthController {
-  async register(req: any, res: any) {
+  async register(req: Request, res: Response) {
     try {
       const authService = new AuthService();
       const result = await authService.register(req.body);
@@ -13,7 +14,7 @@ export class AuthController {
     }
   }
 
-  async login(req: any, res: any) {
+  async login(req: Request, res: Response) {
     try {
       const authService = new AuthService();
       const result = await authService.login(req.body);
@@ -22,5 +23,12 @@ export class AuthController {
     } catch (error: any) {
       res.status(400).json(apiResponse(false, error.message));
     }
+  }
+
+  async getCurrentUser(req: Request, res: Response) {
+    return res.status(200).json({
+      success: true,
+      data: req.user,
+    });
   }
 }
