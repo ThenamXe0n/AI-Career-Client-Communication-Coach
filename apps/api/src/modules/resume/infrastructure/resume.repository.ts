@@ -10,4 +10,19 @@ export class ResumeRepository {
       userId,
     });
   }
+
+  async updateRawText(
+  resumeId: string,
+  rawText: string
+) {
+  return ResumeModel.findByIdAndUpdate(
+    resumeId,
+    {
+      rawText,
+    },
+    {
+      new: true,
+    }
+  );
+}
 }

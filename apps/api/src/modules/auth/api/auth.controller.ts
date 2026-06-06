@@ -26,9 +26,7 @@ export class AuthController {
   }
 
   async getCurrentUser(req: Request, res: Response) {
-    return res.status(200).json({
-      success: true,
-      data: req.user,
-    });
+    let response = apiResponse(true, "User registered successfully", req.user);
+    return res.status(200).json(response);
   }
 }

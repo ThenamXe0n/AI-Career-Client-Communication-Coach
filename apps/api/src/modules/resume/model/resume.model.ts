@@ -8,6 +8,24 @@ const resumeSchema = new mongoose.Schema(
       required: true,
     },
 
+    rawText: {
+      type: String,
+    },
+
+    skills: {
+      type: [String],
+      default: [],
+    },
+
+    projects: {
+      type: [String],
+      default: [],
+    },
+
+    experienceYears: {
+      type: Number,
+    },
+
     fileName: {
       type: String,
       required: true,

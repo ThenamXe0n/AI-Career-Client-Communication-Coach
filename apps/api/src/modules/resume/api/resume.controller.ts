@@ -1,19 +1,35 @@
 import { Request, Response } from "express";
 import { ResumeService } from "../application/resume.service";
+import { apiResponse } from "../../../shared/utils/api-response";
 
 const resumeService = new ResumeService();
 
 export class ResumeController {
   uploadResume = async (req: Request, res: Response) => {
-    const userId = req.user!.userId;
+    try {
+      const userId = req.user!.userId;
+      const file = req.file!;
+      const resume = await resumeService.uploadResume(userId, file);
+      let response = apiResponse(true, "Resume uploaded successfully", resume);
+      return res.json(response);
+    } catch (error) {
+      let response = apiResponse(false, error?.message, null);
+      return res.status(500).json(response);
+    }
+  };
 
-    const file = req.file!;
-
-    const resume = await resumeService.uploadResume(userId, file);
-
-    return res.json({
-      success: true,
-      data: resume,
-    });
+  getMyResume = async (req: Request, res: Response) => {
+    try {
+      const resume = await resumeService.getMyResume(req.user?.userId);
+      if (!resume) {
+        let response = apiResponse(false, "Resume not found", null);
+        return res.status(404).json(response);
+      }
+      let response = apiResponse(true, "Resume fetched successfully", resume);
+      return res.json(response);
+    } catch (error) {
+      let response = apiResponse(false, error?.message, null);
+      return res.status(500).json(response);
+    }
   };
 }
