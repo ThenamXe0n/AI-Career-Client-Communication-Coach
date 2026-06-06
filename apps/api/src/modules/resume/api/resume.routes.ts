@@ -16,7 +16,7 @@ router.post(
   resumeController.uploadResume,
 );
 
-router.get("/me", authMiddleware,resumeController.getMyResume)
-
+router.get("/me", authMiddleware, resumeController.getMyResume);
+router.post("/analyze", authMiddleware, resumeController.analyzeResume);
 
 export default router;

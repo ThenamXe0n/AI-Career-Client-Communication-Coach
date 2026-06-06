@@ -11,18 +11,28 @@ export class ResumeRepository {
     });
   }
 
-  async updateRawText(
-  resumeId: string,
-  rawText: string
-) {
-  return ResumeModel.findByIdAndUpdate(
-    resumeId,
-    {
-      rawText,
+  async updateRawText(resumeId: string, rawText: string) {
+    return ResumeModel.findByIdAndUpdate(
+      resumeId,
+      {
+        rawText,
+      },
+      {
+        new: true,
+      },
+    );
+  }
+
+  async updateAnalysis(
+    resumeId: string,
+    data: {
+      skills: string[];
+      projects: string[];
+      experienceYears: number;
     },
-    {
+  ) {
+    return ResumeModel.findByIdAndUpdate(resumeId, data, {
       new: true,
-    }
-  );
-}
+    });
+  }
 }

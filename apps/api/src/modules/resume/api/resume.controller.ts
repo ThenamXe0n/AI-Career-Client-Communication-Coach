@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 import { ResumeService } from "../application/resume.service";
 import { apiResponse } from "../../../shared/utils/api-response";
+import { ResumeAnalysisService } from "../application/resume-analysis.service";
 
 const resumeService = new ResumeService();
+const resumeAnalysisService = new ResumeAnalysisService();
 
 export class ResumeController {
   uploadResume = async (req: Request, res: Response) => {
@@ -29,6 +31,22 @@ export class ResumeController {
       return res.json(response);
     } catch (error) {
       let response = apiResponse(false, error?.message, null);
+      return res.status(500).json(response);
+    }
+  };
+
+  analyzeResume = async (req: Request, res: Response) => {
+    try {
+      const userId = req.user!.userId;
+      const result = await resumeAnalysisService.analyzeResumeForUser(userId);
+      let response = apiResponse(true, "resume analyzed successfully", result);
+      return res.status(200).json(response);
+    } catch (error) {
+      let response = apiResponse(
+        false,
+        error.message || "failed to analyze",
+        null,
+      );
       return res.status(500).json(response);
     }
   };
