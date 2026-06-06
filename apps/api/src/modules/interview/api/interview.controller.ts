@@ -26,4 +26,12 @@ export class InterviewController {
       return res.status(500).json(response);
     }
   };
+  sendMessage = async (req: Request, res: Response) => {
+    const userId = req.user!.userId;
+
+    const result = await interviewService.sendMessage(userId, req.body);
+    let response = apiResponse(true, "Message sent successfully", result);
+
+    return res.status(200).json(response);
+  };
 }

@@ -6,13 +6,10 @@ import { authMiddleware } from "../../../shared/middleware/auth.middleware";
 
 const router = Router();
 
-const interviewController =
-  new InterviewController();
+const interviewController = new InterviewController();
 
-router.post(
-  "/start",
-  authMiddleware,
-  interviewController.startInterview
-);
+router.post("/start", authMiddleware, interviewController.startInterview);
+
+router.post("/message", authMiddleware, interviewController.sendMessage);
 
 export default router;
