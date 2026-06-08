@@ -34,4 +34,51 @@ export class InterviewController {
 
     return res.status(200).json(response);
   };
+  getMyInterviews = async (req: Request, res: Response) => {
+    try {
+      const userId = req.user!.userId;
+
+      const interviews = await interviewService.getMyInterviews(userId);
+
+      const response = apiResponse(
+        true,
+        "Interviews fetched successfully",
+        interviews,
+      );
+
+      return res.status(200).json(response);
+    } catch (error) {
+      const response = apiResponse(
+        false,
+        error?.message || "Failed to fetch interviews",
+        null,
+      );
+
+      return res.status(500).json(response);
+    }
+  };
+  getInterviewDetails = async (req: Request, res: Response) => {
+    try {
+      const data = await interviewService.getInterviewDetails(
+        req.params.id,
+        req.user!.userId,
+      );
+
+      const response = apiResponse(
+        true,
+        "Interview details fetched successfully",
+        data,
+      );
+
+      return res.status(200).json(response);
+    } catch (error) {
+      const response = apiResponse(
+        false,
+        error?.message || "Failed to fetch interview details",
+        null,
+      );
+
+      return res.status(500).json(response);
+    }
+  };
 }

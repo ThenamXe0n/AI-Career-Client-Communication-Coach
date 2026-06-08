@@ -53,4 +53,19 @@ export class ReportService {
     await interviewRepository.markCompleted(interviewId);
     return report;
   }
+  async getReport(interviewId: string) {
+    try {
+      const report = await reportRepository.findByInterviewId(interviewId);
+
+      if (!report) {
+        throw new Error("Report not found");
+      }
+
+      return report;
+    } catch (error) {
+      console.error("Error fetching report:", error);
+
+      throw new Error("Failed to fetch report");
+    }
+  }
 }

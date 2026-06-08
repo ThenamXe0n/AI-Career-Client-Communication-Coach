@@ -8,6 +8,7 @@ const router = Router();
 
 const reportController = new ReportController();
 
+router.get("/:interviewId", authMiddleware, reportController.getReport);
 router.post(
   "/:interviewId/generate",
   authMiddleware,

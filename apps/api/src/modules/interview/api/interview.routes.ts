@@ -11,5 +11,7 @@ const interviewController = new InterviewController();
 router.post("/start", authMiddleware, interviewController.startInterview);
 
 router.post("/message", authMiddleware, interviewController.sendMessage);
+router.get("/", authMiddleware, interviewController.getMyInterviews);
+router.get("/:id", authMiddleware, interviewController.getInterviewDetails);
 
 export default router;

@@ -111,4 +111,38 @@ export class InterviewService {
       throw new Error("Failed to send message");
     }
   }
+  async getMyInterviews(userId: string) {
+    try {
+      return await interviewRepository.findByUserId(userId);
+    } catch (error) {
+      console.error("Error fetching interviews:", error);
+
+      throw new Error("Failed to fetch interviews");
+    }
+  }
+  async getInterviewDetails(interviewId: string, userId: string) {
+    try {
+      const interview = await interviewRepository.findById(interviewId);
+
+      if (!interview) {
+        throw new Error("Interview not found");
+      }
+
+      if (interview.userId.toString() !== userId) {
+        throw new Error("Unauthorized");
+      }
+
+      const messages =
+        await messageRepository.getConversationHistory(interviewId);
+
+      return {
+        interview,
+        messages,
+      };
+    } catch (error) {
+      console.error("Error fetching interview details:", error);
+
+      throw new Error("Failed to fetch interview details");
+    }
+  }
 }

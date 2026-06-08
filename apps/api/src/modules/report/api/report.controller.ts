@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import { ReportService } from "../application/report.service";
+import { apiResponse } from "../../../shared/utils/api-response";
 
 const reportService = new ReportService();
 
@@ -16,5 +17,22 @@ export class ReportController {
       success: true,
       data: report,
     });
+  };
+  getReport = async (req: Request, res: Response) => {
+    try {
+      const report = await reportService.getReport(req.params.interviewId);
+
+      const response = apiResponse(true, "Report fetched successfully", report);
+
+      return res.status(200).json(response);
+    } catch (error) {
+      const response = apiResponse(
+        false,
+        error?.message || "Failed to fetch report",
+        null,
+      );
+
+      return res.status(500).json(response);
+    }
   };
 }
