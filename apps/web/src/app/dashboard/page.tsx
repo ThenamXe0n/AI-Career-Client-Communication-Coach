@@ -1,9 +1,17 @@
+import {
+  DashboardLayout,
+} from "@/shared/components/dashboard-layout";
+
 export default function DashboardPage() {
 
-    return (
-        <div>
-            Dashboard
-        </div>
-    );
+  return (
+    <DashboardLayout>
+
+      <h1>
+        Dashboard
+      </h1>
+
+    </DashboardLayout>
+  );
 
 }

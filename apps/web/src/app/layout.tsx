@@ -1,3 +1,4 @@
+import "./globals.css"
 import {
   QueryProvider,
 } from "@/shared/providers/query-provider";
