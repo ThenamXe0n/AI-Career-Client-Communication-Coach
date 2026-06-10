@@ -1,10 +1,11 @@
+import { DashboardLayout } from '@/shared/components/dashboard-layout'
 import React from 'react'
 
 const InterviewPage = () => {
     return (
-        <div>
+        <DashboardLayout>
             page
-        </div>
+        </DashboardLayout>
     )
 }
 

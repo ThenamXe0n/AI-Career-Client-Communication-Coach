@@ -1,6 +1,6 @@
 "use client";
 
-import { Sidebar }
+import Sidebar
     from "./sidebar";
 
 import { ProtectedRoute }
@@ -16,19 +16,12 @@ export function DashboardLayout({
         <ProtectedRoute>
 
             <div
-                className="
-        flex
-        min-h-screen
-        "
+                className="flex min-h-screen "
             >
                 <Sidebar />
 
                 <main
-                    className="
-          flex-1
-          p-6
-          "
-                >
+                    className="flex-1  p-10">
                     {children}
                 </main>
 

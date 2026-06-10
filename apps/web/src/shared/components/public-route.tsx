@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { useAuth } from "../hooks/use-auth";
 
-export function ProtectedRoute({
+export function PublicRoute({
     children,
 }: {
     children: React.ReactNode;
@@ -20,9 +20,11 @@ export function ProtectedRoute({
     useEffect(() => {
         if (
             !isLoading &&
-            !isAuthenticated
+            isAuthenticated
         ) {
-            router.replace("/login");
+            router.replace(
+                "/dashboard"
+            );
         }
     }, [
         isAuthenticated,
@@ -34,7 +36,7 @@ export function ProtectedRoute({
         return <p>Loading...</p>;
     }
 
-    if (!isAuthenticated) {
+    if (isAuthenticated) {
         return null;
     }
 

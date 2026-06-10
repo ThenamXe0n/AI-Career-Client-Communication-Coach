@@ -1,16 +1,22 @@
 "use client";
 
-import { authStorage }
-from "../lib/auth";
+import { useCurrentUser }
+from "@/features/auth/hooks/use-current-user";
 
 export const useAuth = () => {
 
-  const token =
-    authStorage.getToken();
+  const {
+    data,
+    isLoading,
+    error,
+  } = useCurrentUser();
 
   return {
+    user: data?.data,
+    isLoading,
     isAuthenticated:
-      !!token,
+      !!data?.data,
+    error,
   };
 
 };
