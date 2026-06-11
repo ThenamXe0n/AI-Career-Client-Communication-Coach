@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { useAuth } from "../hooks/use-auth";
+import { Loader } from "./Loader";
 
 export function PublicRoute({
     children,
@@ -33,7 +34,7 @@ export function PublicRoute({
     ]);
 
     if (isLoading) {
-        return <p>Loading...</p>;
+        return <Loader/>;
     }
 
     if (isAuthenticated) {

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import {
     BrainCircuit,
@@ -16,11 +16,51 @@ import {
     Menu,
     X,
 } from "lucide-react";
+import { logout } from "@/features/auth/api/logout-user";
+import { authStorage } from "../lib/auth";
+
+import { Confirm, Notify } from "notiflix";
+import { useLogout } from "@/features/auth/api/use-logout";
 
 export default function Sidebar() {
     const pathname = usePathname();
     const [collapsed, setCollapsed] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const router = useRouter()
+    const LogoutMutation = useLogout()
+    Confirm.init({
+        backgroundColor: "#032c26",
+        titleColor: "white",
+        messageColor: "cyan",
+        cancelButtonBackground: "red",
+        cancelButtonColor: "white",
+        okButtonBackground: "black",
+        okButtonColor: "white"
+    })
+
+
+    const handleLogout = async () => {
+        Confirm.show(
+            'Logout',
+            'Are sure to you want to logout?',
+            'Logout',
+            'Cancel',
+            async () => {
+                const response = await LogoutMutation.mutateAsync();
+                if (response.success) {
+                    authStorage.removeToken()
+                    router.push("/");
+                }
+            },
+            () => {
+                Notify.info("Logout Aborted!!");
+            },
+            {
+            },
+        );
+
+    };
+
 
     const linkClass = (href: string) =>
         `group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-150 ${pathname === href
@@ -171,7 +211,7 @@ export default function Sidebar() {
 
                 <div className="border-t border-[#1E2D45] my-4" />
 
-                <button className={`group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-500 hover:bg-red-500/10 hover:text-red-400 transition-all duration-150 w-full ${collapsed ? "justify-center px-2.5" : ""}`}>
+                <button onClick={handleLogout} className={`group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-500 hover:bg-red-500/10 hover:text-red-400 transition-all duration-150 w-full ${collapsed ? "justify-center px-2.5" : ""}`}>
                     <LogOut className="flex-shrink-0 w-[18px] h-[18px]" strokeWidth={1.75} />
                     {!collapsed && <span className="whitespace-nowrap">Log out</span>}
                     {collapsed && <span className="pointer-events-none absolute left-full ml-3 z-50 rounded-md bg-[#1E2D45] border border-[#253650] px-2.5 py-1 text-xs text-slate-200 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-150">Log out</span>}
