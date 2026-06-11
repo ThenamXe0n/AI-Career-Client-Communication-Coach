@@ -2,11 +2,10 @@
 
 import { useMutation } from "@tanstack/react-query";
 
-import { login } from "../api/login";
+import { logout } from "../api/logout-user";
 
-export const useLogin = () => {
+export const useLogout = () => {
   return useMutation({
-    mutationFn: login,
+    mutationFn: logout,
   });
 };
-

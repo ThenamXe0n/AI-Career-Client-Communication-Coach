@@ -28,7 +28,7 @@ export class AuthService {
       });
 
       // Generate a token
-      const token = generateToken(user.id);
+      const token = generateToken(user.id, user.name, user.email);
 
       return { user, token };
     } catch (error: any) {
@@ -52,9 +52,9 @@ export class AuthService {
         throw new AppError("Invalid credentials", 400);
       }
       // Generate a token
-      const token = generateToken(user.id);
+      const token = generateToken(user.id, user.name, user.email);
       return { user, token };
-    } catch (error:any) {
+    } catch (error: any) {
       throw new AppError(error.message, 500);
     }
   }
