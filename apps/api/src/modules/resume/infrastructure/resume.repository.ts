@@ -8,7 +8,7 @@ export class ResumeRepository {
   async findByUserId(userId: string) {
     return ResumeModel.findOne({
       userId,
-    });
+    }).select("-rawText");
   }
 
   async updateRawText(resumeId: string, rawText: string) {
