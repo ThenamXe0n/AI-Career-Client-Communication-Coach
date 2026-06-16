@@ -27,7 +27,6 @@ export function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
 
-    console.log(user,isAuthenticated)
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {

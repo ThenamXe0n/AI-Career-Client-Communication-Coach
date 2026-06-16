@@ -13,6 +13,7 @@ export class AIService {
 
         let res = await retry(() => provider.generate(prompt), 3);
         console.log(`Success: ${provider.constructor.name}`);
+        console.log(res)
         return res;
       } catch (error) {
         console.error(provider.constructor.name, "failed");

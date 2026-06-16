@@ -1,11 +1,21 @@
 import { ResumeRepository } from "../infrastructure/resume.repository";
 import { PdfService } from "./pdf.service";
+import fs from "fs";
 
 const resumeRepository = new ResumeRepository();
 
 export class ResumeService {
   async uploadResume(userId: string, file: Express.Multer.File) {
     let pdfService = new PdfService();
+    let checkprev = await resumeRepository.findByUserId(userId);
+    if (checkprev) {
+      let filePath = `${checkprev.fileUrl.replace(/\\/g, "/")}`;
+      if (fs.existsSync(filePath)) {
+
+        fs.unlinkSync(filePath);
+      }
+      await resumeRepository.findByIdAndDelete(checkprev?._id);
+    }
     const resume = await resumeRepository.create({
       userId,
 

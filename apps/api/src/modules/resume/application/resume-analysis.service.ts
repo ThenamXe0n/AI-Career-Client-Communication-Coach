@@ -1,16 +1,16 @@
+import { AIService } from "../../../ai/core/ai.service";
 import { parseResumeAnalysis } from "../../../ai/parsers/resume.parser";
 import { resumeAnalysisPrompt } from "../../../ai/prompts/resume-analysis.prompt";
-import { GeminiProvider } from "../../../ai/providers/gemini.provider";
 import { ResumeRepository } from "../infrastructure/resume.repository";
 
-const geminiProvider = new GeminiProvider();
+const aIServiceProvider = new AIService();
 const resumeRepository = new ResumeRepository();
 
 export class ResumeAnalysisService {
   async analyzeResume(rawText: string) {
     try {
       const prompt = resumeAnalysisPrompt(rawText);
-      const response = await geminiProvider.generate(prompt);
+      const response = await aIServiceProvider.generate(prompt);
       const analysis = parseResumeAnalysis(response);
       return analysis;
     } catch (error) {
@@ -20,7 +20,7 @@ export class ResumeAnalysisService {
   }
   async analyzeResumeForUser(userId: string) {
     try {
-      const resume = await resumeRepository.findByUserId(userId);
+      const resume = await resumeRepository.findByUserIdwithRawText(userId);
 
       if (!resume) {
         throw new Error("Resume not found");
@@ -28,7 +28,8 @@ export class ResumeAnalysisService {
 
       const prompt = resumeAnalysisPrompt(resume.rawText || "");
 
-      const response = await geminiProvider.generate(prompt);
+
+      const response = await aIServiceProvider.generate(prompt);
 
       const analysis = parseResumeAnalysis(response);
 

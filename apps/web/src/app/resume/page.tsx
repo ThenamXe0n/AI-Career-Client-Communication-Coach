@@ -11,6 +11,7 @@ export default function ResumePage() {
 
   return (
     <DashboardLayout>
+      
 
       <ResumeOverview/>
 

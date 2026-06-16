@@ -60,6 +60,7 @@ export function ResumeCard() {
                     ))}
                 </div>
             </div>
+          
 
             <ProjectsSection
                 projects={

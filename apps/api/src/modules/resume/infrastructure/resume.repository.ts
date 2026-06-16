@@ -10,6 +10,11 @@ export class ResumeRepository {
       userId,
     }).select("-rawText");
   }
+  async findByUserIdwithRawText(userId: string) {
+    return ResumeModel.findOne({
+      userId,
+    });
+  }
 
   async updateRawText(resumeId: string, rawText: string) {
     return ResumeModel.findByIdAndUpdate(
@@ -34,5 +39,9 @@ export class ResumeRepository {
     return ResumeModel.findByIdAndUpdate(resumeId, data, {
       new: true,
     });
+  }
+
+  async findByIdAndDelete(resumeId: string) {
+    return ResumeModel.findByIdAndDelete(resumeId, { new: true });
   }
 }
