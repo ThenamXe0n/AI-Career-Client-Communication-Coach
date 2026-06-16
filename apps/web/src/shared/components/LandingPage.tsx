@@ -113,7 +113,7 @@ export default function LandingPage() {
     <Navbar/>
 
       {/* ───────────────────────── HERO ───────────────────────── */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden pt-20">
         <div
           className="absolute w-[560px] h-[560px] rounded-full opacity-[0.15] blur-3xl pointer-events-none"
           style={{

@@ -10,4 +10,5 @@ export const env = {
   JWT_SECRET: process.env.JWT_SECRET || "",
 
   GEMINI_API_KEY: process.env.GEMINI_API_KEY || "",
+  GROQ_API_KEY: process.env.GROQ_API_KEY || "",
 };

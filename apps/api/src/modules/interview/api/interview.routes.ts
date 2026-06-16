@@ -13,5 +13,6 @@ router.post("/start", authMiddleware, interviewController.startInterview);
 router.post("/message", authMiddleware, interviewController.sendMessage);
 router.get("/", authMiddleware, interviewController.getMyInterviews);
 router.get("/:id", authMiddleware, interviewController.getInterviewDetails);
+router.delete("/:id",authMiddleware,interviewController.deleteInterview)
 
 export default router;

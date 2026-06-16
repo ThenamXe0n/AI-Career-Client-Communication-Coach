@@ -81,4 +81,11 @@ export class InterviewController {
       return res.status(500).json(response);
     }
   };
+  deleteInterview = async(req:Request,res:Response)=>{
+    try{
+      const data = await interviewService.deleteInterview()
+    }catch(error){
+
+    }
+  }
 }

@@ -1,3 +1,4 @@
+import { AIService } from "../../../ai/core/ai.service";
 import { parseInterviewReport } from "../../../ai/parsers/report.parser";
 import { evaluateInterviewPrompt } from "../../../ai/prompts/report/evaluate-interview.prompt";
 import { GeminiProvider } from "../../../ai/providers/gemini.provider";
@@ -10,7 +11,7 @@ import { formatReportConversation } from "./utils/format-report-conversation";
 const interviewRepository = new InterviewRepository();
 const messageRepository = new MessageRepository();
 const resumeRepository = new ResumeRepository();
-const geminiProvider = new GeminiProvider();
+const aiServiceProvider = new AIService();
 const reportRepository = new ReportRepository();
 
 export class ReportService {
@@ -39,7 +40,7 @@ export class ReportService {
     const prompt = evaluateInterviewPrompt(resume.rawText, conversation);
 
     //generate the response
-    const response = await geminiProvider.generate(prompt);
+    const response = await aiServiceProvider.generate(prompt);
     //return the generated report
     const report = parseInterviewReport(response);
     //save the report to the database
