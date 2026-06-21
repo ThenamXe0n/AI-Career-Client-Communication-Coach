@@ -1,3 +1,4 @@
+import DashboardStats from "@/features/dashboard/components/dashboard-stats";
 import { DashboardSummary } from "@/features/dashboard/components/dashboard-summary";
 import { QuickActions } from "@/features/dashboard/components/quick-actions";
 import {
@@ -9,12 +10,18 @@ export default function DashboardPage() {
   return (
     <DashboardLayout>
 
-         <div
+      <div
         className="
         space-y-6
         "
       >
 
+        <DashboardStats data={{
+          totalInterviews: 15,
+          completedInterviews: 12,
+          averageScore: 4.3,
+          passRate: 82,
+        }} />
         <DashboardSummary />
 
         <QuickActions />

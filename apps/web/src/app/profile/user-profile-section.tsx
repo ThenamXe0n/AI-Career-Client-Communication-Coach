@@ -68,6 +68,8 @@ export default function ProfilePage() {
     const [editMode, setEditMode] = useState(false);
     const [draft, setDraft] = useState<UserProfile>(profile);
 
+    console.log("profile",user)
+
 
 
 
@@ -115,13 +117,13 @@ export default function ProfilePage() {
                         {/* Avatar + identity */}
                         <div className="flex flex-col items-center -mt-9 pb-4 px-4">
                             <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-400 to-teal-500 flex items-center justify-center text-lg font-medium text-white ring-4 ring-gray-950/60 mb-3 select-none">
-                                {getInitials(profile.name)}
+                                {getInitials(user.name)}
                             </div>
 
                             {!editMode ? (
                                 <>
-                                    <p className="text-white font-medium text-sm text-center leading-tight">{profile.name}</p>
-                                    <p className="text-indigo-300/70 text-xs text-center mt-0.5">{profile.role}</p>
+                                    <p className="text-white font-medium text-sm text-center leading-tight">{user.name}</p>
+                                    <p className="text-indigo-300/70 text-xs text-center mt-0.5">{user.role}</p>
                                     <button
                                         onClick={() => { setDraft(profile); setEditMode(true); }}
                                         className="mt-3 flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition-all"
@@ -166,12 +168,12 @@ export default function ProfilePage() {
                         {/* Info rows */}
                         <div className="px-4 py-3 border-t border-white/10 space-y-3">
                             {[
-                                { Icon: Mail, val: profile.email },
-                                { Icon: Briefcase, val: profile.role },
-                                { Icon: Building2, val: profile.department },
-                                { Icon: MapPin, val: profile.location },
-                            ].map(({ Icon, val }) => (
-                                <div key={val} className="flex items-center gap-2.5">
+                                { Icon: Mail, val: user.email },
+                                { Icon: Briefcase, val: user.role },
+                                { Icon: Building2, val: user.department },
+                                { Icon: MapPin, val: user.location },
+                            ].map(({ Icon, val },idx) => (
+                                <div key={idx} className="flex items-center gap-2.5">
                                     <Icon size={13} className="text-indigo-400/70 flex-shrink-0" />
                                     <span className="text-xs text-white/55 truncate">{val}</span>
                                 </div>

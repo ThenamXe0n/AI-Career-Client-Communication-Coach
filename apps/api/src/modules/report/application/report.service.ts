@@ -69,4 +69,19 @@ export class ReportService {
       throw new Error("Failed to fetch report");
     }
   }
+  async getReportStatus( userId: string) {
+    try {
+      const report = await reportRepository.getReportStats(userId);
+
+      if (!report) {
+        throw new Error("Report not found");
+      }
+
+      return report;
+    } catch (error) {
+      console.error("Error fetching report:", error);
+
+      throw new Error("Failed to fetch report");
+    }
+  }
 }

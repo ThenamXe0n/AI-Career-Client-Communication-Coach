@@ -35,4 +35,23 @@ export class ReportController {
       return res.status(500).json(response);
     }
   };
+  getReportStatus = async (req: Request, res: Response) => {
+    const userId = req.user!.userId;
+    console.log("userId",userId)
+    try {
+      const report = await reportService.getReportStatus(userId);
+
+      const response = apiResponse(true, "Report fetched successfully", report);
+
+      return res.status(200).json(response);
+    } catch (error) {
+      const response = apiResponse(
+        false,
+        error?.message || "Failed to fetch report",
+        null,
+      );
+
+      return res.status(500).json(response);
+    }
+  };
 }

@@ -1,7 +1,9 @@
 "use client";
 
 import { useResume }
-from "@/features/resume/hooks/use-resume";
+  from "@/features/resume/hooks/use-resume";
+import { useQuery } from "@tanstack/react-query";
+import { getDashboardStats } from "../api/get-dashboardstats";
 
 export const useDashboard =
   () => {
@@ -14,3 +16,11 @@ export const useDashboard =
     };
 
   };
+
+
+export const useDashboardStats = () => {
+  return useQuery({
+    queryKey: ["dashboardstats"],
+    queryFn: getDashboardStats,
+  });
+}

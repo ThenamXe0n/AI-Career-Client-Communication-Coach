@@ -1,20 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { SendHorizonal, Loader2 } from "lucide-react";
+import { SendHorizonal, Loader2, MemoryStick } from "lucide-react";
 
 import { useSendMessage } from "../hooks/use-send-message";
+import { useGenerateReport } from "@/features/report/hooks/use-generate-report";
+import Notiflix, { Notify } from "notiflix";
 
 export function MessageForm({
     interviewId,
+    messagesLength
 }: {
     interviewId: string;
+    messagesLength: number
 }) {
     const [message, setMessage] =
         useState("");
 
     const sendMessageMutation =
         useSendMessage();
+
+    const { isPending: generateReportPending, mutateAsync } = useGenerateReport()
 
     const handleSend =
         async () => {
@@ -44,6 +50,16 @@ export function MessageForm({
             handleSend();
         }
     };
+
+    const handleReportGeneration = async () => {
+        if (messagesLength < 20) {
+            Notiflix.Notify.info("not enough question answered to generate report")
+            return
+        }
+       await mutateAsync(interviewId)
+
+        Notiflix.Notify.success("report generated now")
+    }
 
     return (
         <div
@@ -127,6 +143,10 @@ export function MessageForm({
                         />
                     )}
                 </button>
+                <div onClick={handleReportGeneration} className="rounded-md hover:bg-violet-500 hover:scale-95 active:scale-75 hover:shadow-violet-400 px-2 cursor-pointer duration-200 py-1 text-emerald-200 capitalize border border-emerald-200/60 shadow-2xl bg-emerald-400/5 shadow-emerald-500 flex items-center gap-2">
+                    {generateReportPending ? "generating..." : "generate report"}
+                    {generateReportPending ? <Loader2 className="animate-spin" /> : <MemoryStick />}
+                </div>
             </div>
 
             <p

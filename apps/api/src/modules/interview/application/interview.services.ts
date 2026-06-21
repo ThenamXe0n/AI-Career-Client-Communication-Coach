@@ -3,7 +3,6 @@ import { MessageRepository } from "../infrastructure/message.repository";
 
 import { ResumeRepository } from "../../resume/infrastructure/resume.repository";
 
-
 import { startInterviewPrompt } from "../../../ai/prompts/interview/start-interview.prompt";
 import { StartInterviewDto } from "../domain/interview.dto";
 import { SendMessageDto } from "../domain/message.dto";
@@ -16,7 +15,6 @@ const interviewRepository = new InterviewRepository();
 const messageRepository = new MessageRepository();
 
 const resumeRepository = new ResumeRepository();
-
 
 const aIService = new AIService();
 
@@ -154,5 +152,8 @@ export class InterviewService {
 
       throw new Error("Failed to fetch interview details");
     }
+  }
+  async getDashboardStats(userId: string) {
+    return interviewRepository.getDashboardStats(userId);
   }
 }

@@ -14,5 +14,6 @@ router.post(
   authMiddleware,
   reportController.generateReport,
 );
+router.get("/stats/get", authMiddleware, reportController.getReportStatus);
 
 export default router;

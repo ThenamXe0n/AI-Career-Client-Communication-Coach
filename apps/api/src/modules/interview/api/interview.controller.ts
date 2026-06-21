@@ -81,11 +81,16 @@ export class InterviewController {
       return res.status(500).json(response);
     }
   };
-  deleteInterview = async(req:Request,res:Response)=>{
-    try{
-      const data = await interviewService.deleteInterview()
-    }catch(error){
+  deleteInterview = async (req: Request, res: Response) => {
+    try {
+      const data = await interviewService.deleteInterview();
+    } catch (error) {}
+  };
+  getDashboardStats = async (req: Request, res: Response) => {
+    const userId = req.user!.userId;
 
-    }
-  }
+    const stats = await interviewService.getDashboardStats(userId);
+
+    return res.json(apiResponse(true, "Dashboard stats fetched", stats));
+  };
 }

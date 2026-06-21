@@ -21,7 +21,7 @@ export function DashboardLayout({
                 <Sidebar />
 
                 <main
-                    className="flex-1  p-10">
+                    className="flex-1 max-h-screen overflow-y-scroll  p-10">
                     {children}
                 </main>
 

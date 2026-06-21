@@ -5,7 +5,8 @@ import { MessageForm } from "@/features/interview/components/message-form";
 import { useInterviewDetails } from "@/features/interview/hooks/use-interview-details";
 import { InterviewLoader } from "@/shared/components/interviewLoader";
 import { cn } from "@/shared/lib/cn";
-import { ArrowLeftCircle, BrainCircuit, Briefcase, CalendarDays } from "lucide-react";
+import { ArrowLeftCircle, BrainCircuit, Briefcase, CalendarDays, EyeIcon } from "lucide-react";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 
 interface InterviewHeaderProps {
@@ -228,7 +229,13 @@ const InterviewScreen = () => {
 
             <Conversation messages={messages} />
 
-            <MessageForm interviewId={interviewId} />
+            {interview.status === "completed" ? <div className="fixed right-1/3 translate-x-1/3 bottom-20 flex items-center gap-4 font-bold  bg-black p-4 rounded-2xl justify-between backdrop-blur-3xl border-2 border-blue-400 shadow-2xl shadow-emerald-400/30 w-5xl ">
+                <div className="flex items-center gap-2 text-white">
+                    <div className="size-4 rounded-full bg-green-400"></div>
+                    Interview Completed
+                </div>
+                <Link href={`/report/${interviewId}`} className="flex items-center gap-2 bg-indigo-800 px-2 py-1 rounded-full font-medium text-sm shadow-lg shadow-white/10 capitalize"><EyeIcon /> view report</Link>
+            </div> : <MessageForm messagesLength={messages.length} interviewId={interviewId} />}
         </div>
     );
 };
