@@ -1,7 +1,9 @@
 "use client";
 
+import AiSpeakingIndicator from "@/shared/components/speech/aispeakingindicator";
+import { useSpeech } from "@/shared/hooks/use-speech";
 import { motion } from "framer-motion";
-import { Bot, User2 } from "lucide-react";
+import { Bot, Mic, User2 } from "lucide-react";
 
 interface Props {
   sender: string;
@@ -15,6 +17,11 @@ export function MessageBubble({
   isTyping = false,
 }: Props) {
   const isUser = sender === "user";
+  const { speak, status } = useSpeech()
+
+  function handleSpeakContent() {
+    speak(content)
+  }
 
   return (
     <motion.div
@@ -37,8 +44,8 @@ export function MessageBubble({
     >
       {/* AI Avatar */}
 
-      {!isUser && (
-        <div
+      {!isUser && (<>
+        {status !== "speaking" ? <div
           className="
           flex
           h-10
@@ -54,7 +61,8 @@ export function MessageBubble({
           "
         >
           <Bot size={18} />
-        </div>
+        </div> : <AiSpeakingIndicator isUser={isUser} variant="avatar" active={status==="speaking"} />}
+      </>
       )}
 
       {/* Bubble */}
@@ -63,16 +71,16 @@ export function MessageBubble({
         className={`
           max-w-[80%]
           rounded-2xl
+          relative
           px-4
           py-3
-          ${
-            isUser
-              ? `
+          ${isUser
+            ? `
                 rounded-br-md
                 bg-violet-600
                 text-white
               `
-              : `
+            : `
                 rounded-bl-md
                 border
                 border-zinc-800
@@ -146,6 +154,9 @@ export function MessageBubble({
             {content}
           </p>
         )}
+        <div className={`absolute -bottom-8 ${isUser ? 'right-0' : 'left-0'}`}>
+          {status === "speaking" ? <AiSpeakingIndicator isUser={isUser} variant="pill" showIdle active={status === "speaking"} /> : <Mic onClick={handleSpeakContent} size={20} className="text-blue-400" />}
+        </div>
       </div>
 
       {/* User Avatar */}
