@@ -119,11 +119,6 @@ export default function InterviewReport() {
 
         return "you need to study more"
     }
-
-
-
-
-    console.log("data response", data)
     const report = data.data
     const date = new Date(report?.createdAt);
     const dateStr = date.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
@@ -132,13 +127,13 @@ export default function InterviewReport() {
 
     return (
         <div className="min-h-screen bg-[#0a0c12] text-[#e2e8f0] p-4 sm:p-7">
-            <div className="max-w-5xl mx-auto">
+            <div className="max-w-6xl mx-auto">
 
                 {/* Top bar */}
                 <div className="flex items-center justify-between mb-7">
                     <div className="flex items-center gap-2 bg-[#13161f] border border-[#1e2231] rounded-xl px-3 py-2">
                         <div className="w-2 h-2 rounded-full bg-[#7c5cfc]" />
-                        <span className="text-[13px] font-medium text-[#94a3b8]">HireIQ</span>
+                        <span className="text-[13px] font-medium text-[#94a3b8]">CareerCoach AI</span>
                     </div>
                     <div className="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-3 py-1.5 text-xs font-medium text-emerald-400">
                         <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />

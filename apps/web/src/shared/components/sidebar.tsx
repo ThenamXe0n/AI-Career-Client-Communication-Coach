@@ -15,6 +15,7 @@ import {
     ChevronRight,
     Menu,
     X,
+    File,
 } from "lucide-react";
 import { logout } from "@/features/auth/api/logout-user";
 import { authStorage } from "../lib/auth";
@@ -143,6 +144,11 @@ export default function Sidebar() {
                         <BarChart2 className={iconClass("/report")} strokeWidth={1.75} />
                         <span>Reports</span>
                     </Link>
+                    <Link href="/resume-builder" onClick={() => setMobileOpen(false)} className={linkClass("/resume-builder")}>
+                        {pathname === "/resume-builder" && <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-emerald-400" />}
+                        <BarChart2 className={iconClass("/resume-builder")} strokeWidth={1.75} />
+                        <span>Resume Builder</span>
+                    </Link>
                 </nav>
 
                 <div className="border-t border-[#1E2D45] my-4" />
@@ -206,6 +212,12 @@ export default function Sidebar() {
                         <BarChart2 className={iconClass("/report")} strokeWidth={1.75} />
                         {!collapsed && <span className="whitespace-nowrap">Reports</span>}
                         {collapsed && <span className="pointer-events-none absolute left-full ml-3 z-50 rounded-md bg-[#1E2D45] border border-[#253650] px-2.5 py-1 text-xs text-slate-200 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-150">Reports</span>}
+                    </Link>
+                    <Link href="/resume-builder" className={linkClass("/resume-builder")}>
+                        {pathname === "/resume-builder" && !collapsed && <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-emerald-400" />}
+                        <File className={iconClass("/resume-builder")} strokeWidth={1.75} />
+                        {!collapsed && <span className="whitespace-nowrap">Resume Builder</span>}
+                        {collapsed && <span className="pointer-events-none absolute left-full ml-3 z-50 rounded-md bg-[#1E2D45] border border-[#253650] px-2.5 py-1 text-xs text-slate-200 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-150">Resume Builder</span>}
                     </Link>
                 </nav>
 

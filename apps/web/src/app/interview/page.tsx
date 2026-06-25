@@ -9,7 +9,7 @@ const InterviewPage = () => {
     const [openForm, setOpenForm] = useState<boolean>(false)
     return (
         <DashboardLayout>
-            <div className="space-y-6">
+            <div className="space-y-6 p-10">
 
                 {!openForm && <button
                     onClick={() => setOpenForm(true)}

@@ -16,12 +16,7 @@ export default function DashboardPage() {
         "
       >
 
-        <DashboardStats data={{
-          totalInterviews: 15,
-          completedInterviews: 12,
-          averageScore: 4.3,
-          passRate: 82,
-        }} />
+        <DashboardStats />
         <DashboardSummary />
 
         <QuickActions />

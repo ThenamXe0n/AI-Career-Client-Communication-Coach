@@ -217,7 +217,7 @@ const InterviewScreen = () => {
     const messages = data?.data?.messages ?? [];
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 p-10">
             {interview && (
                 <InterviewHeader
                     role={interview.role}

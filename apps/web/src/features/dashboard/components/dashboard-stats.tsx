@@ -86,14 +86,14 @@ function StarRow({ score }: { score: number }) {
 export default function DashboardStats() {
 
     const { data: response } = useDashboardStats()
-    const data = response.data[0]
+    const data = response?.data[0]
     console.log("dash", data)
-    const total = useCountUp(data.totalInterviews);
-    const completed = useCountUp(data.completedInterviews);
-    const avgScore = useCountUp(data.averageScore, 900, 1);
-    const passRate = useCountUp(data.passRate);
+    const total = useCountUp(data?.totalInterviews || 0);
+    const completed = useCountUp(data?.completedInterviews || 0);
+    const avgScore = useCountUp(data?.averageScore|| 0, 900, 1);
+    const passRate = useCountUp(data?.passRate||0);
 
-    const completePct = Math.round((data.completedInterviews / data.totalInterviews) * 100);
+    const completePct = Math.round((completed  / total) * 100);
 
     // Ring math for pass rate
     const radius = 24;
@@ -103,11 +103,11 @@ export default function DashboardStats() {
 
     useEffect(() => {
         const t = setTimeout(() => {
-            setRingOffset(circumference * (1 - data.passRate / 100));
+            setRingOffset(circumference * (1 - passRate / 100));
             setBarWidth(completePct);
         }, 80);
         return () => clearTimeout(t);
-    }, [circumference, data.passRate, completePct]);
+    }, [circumference, passRate, completePct]);
 
     return (
         <div className="bg-[#0a0c12] p-6 sm:p-7 rounded-[20px]">
@@ -147,7 +147,7 @@ export default function DashboardStats() {
                     </div>
                     <p className="text-[32px] font-medium text-white leading-none mb-1.5 tabular-nums">{avgScore}</p>
                     <p className="text-xs text-white/45 mb-3">Average score</p>
-                    <StarRow score={data.averageScore} />
+                    <StarRow score={data?.averageScore} />
                 </GlassCard>
 
                 {/* Pass rate */}

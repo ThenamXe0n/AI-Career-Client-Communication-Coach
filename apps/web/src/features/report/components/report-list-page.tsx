@@ -83,7 +83,7 @@ export default function ReportListPage() {
             <div className="flex items-center justify-between mb-8 flex-wrap gap-3">
                 <div className="flex items-center gap-2 bg-[#13161f] border border-[#1e2231] rounded-xl px-3 py-2">
                     <div className="w-2 h-2 rounded-full bg-violet-500" />
-                    <span className="text-[13px] font-medium text-slate-400">HireIQ</span>
+                    <span className="text-[13px] font-medium text-slate-400">CareerCoach AI</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <button className="flex items-center gap-1.5 bg-[#13161f] border border-[#1e2231] hover:border-[#2d3a4f] text-slate-400 hover:text-slate-200 rounded-xl px-3 py-2 text-[13px] font-medium transition-all">
