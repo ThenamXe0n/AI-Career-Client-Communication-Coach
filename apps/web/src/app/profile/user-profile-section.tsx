@@ -68,7 +68,7 @@ export default function ProfilePage() {
     const [editMode, setEditMode] = useState(false);
     const [draft, setDraft] = useState<UserProfile>(profile);
 
-    console.log("profile",user)
+    console.log("profile", user)
 
 
 
@@ -85,7 +85,7 @@ export default function ProfilePage() {
         setEditMode(false);
     }
 
-   
+
 
     if (isLoading) {
         return <Loader />
@@ -172,7 +172,7 @@ export default function ProfilePage() {
                                 { Icon: Briefcase, val: user.role },
                                 { Icon: Building2, val: user.department },
                                 { Icon: MapPin, val: user.location },
-                            ].map(({ Icon, val },idx) => (
+                            ].map(({ Icon, val }, idx) => (
                                 <div key={idx} className="flex items-center gap-2.5">
                                     <Icon size={13} className="text-indigo-400/70 flex-shrink-0" />
                                     <span className="text-xs text-white/55 truncate">{val}</span>
@@ -187,7 +187,7 @@ export default function ProfilePage() {
                 {/* ── Main panel ───────────────────────────────────────────────── */}
                 <div className="flex-1 min-w-0">
                     {/* Resume glass card */}
-                    <ResumeUploadForm/>
+                    <ResumeUploadForm formClose={() => { return }} />
                     <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden">
                         {/* Interview rows */}
                         <InterviewList />
