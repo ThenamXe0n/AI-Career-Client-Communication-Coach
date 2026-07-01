@@ -206,7 +206,7 @@ function InterviewHeader({
 }
 const InterviewScreen = () => {
     const params = useParams();
-    const interviewId = params.id;
+    const interviewId = params.id ?? "";
 
     const { data, isLoading } = useInterviewDetails(interviewId);
 
