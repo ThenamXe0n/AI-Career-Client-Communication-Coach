@@ -57,6 +57,7 @@ function InterviewHeader({
             className="
             overflow-hidden
             rounded-2xl
+            h-fit
             sticky
             top-0
             border
@@ -217,7 +218,7 @@ const InterviewScreen = () => {
     const messages = data?.data?.messages ?? [];
 
     return (
-        <div className="space-y-6 p-10">
+        <div className="space-y-6 flex flex-col p-10 min-h-screen">
             {interview && (
                 <InterviewHeader
                     role={interview.role}

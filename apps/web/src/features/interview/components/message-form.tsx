@@ -1,11 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { SendHorizonal, Loader2, MemoryStick } from "lucide-react";
+import { SendHorizonal, Loader2, MemoryStick, Mic } from "lucide-react";
 
 import { useSendMessage } from "../hooks/use-send-message";
 import { useGenerateReport } from "@/features/report/hooks/use-generate-report";
 import Notiflix, { Notify } from "notiflix";
+import { useSpeechToText } from "@/shared/hooks/use-speech-to-text";
+import AiSpeakingIndicator, { MiniWaveform } from "@/shared/components/speech/aispeakingindicator";
+import { useSpeech } from "@/shared/hooks/use-speech";
 
 export function MessageForm({
     interviewId,
@@ -14,6 +17,13 @@ export function MessageForm({
     interviewId: string;
     messagesLength: number
 }) {
+    const {
+        transcript,
+        isListening,
+        startListening,
+        stopListening,
+    } = useSpeechToText();
+    const {speak} = useSpeech()
     const [message, setMessage] =
         useState("");
 
@@ -56,10 +66,14 @@ export function MessageForm({
             Notiflix.Notify.info("not enough question answered to generate report")
             return
         }
-       await mutateAsync(interviewId)
+        await mutateAsync(interviewId)
 
         Notiflix.Notify.success("report generated now")
     }
+
+
+
+
 
     return (
         <div
@@ -73,6 +87,10 @@ export function MessageForm({
             p-4
             "
         >
+            <div>
+            <p>{transcript} </p>
+           <button className="text-emerald-500 underline-2 underline-offset-2 " onClick={()=>setMessage(transcript)}>select answer text</button>
+            </div>
             <div
                 className="
                 flex
@@ -108,6 +126,9 @@ export function MessageForm({
                     placeholder:text-zinc-500
                     "
                 />
+                <button onMouseDown={startListening} onMouseUp={()=>{stopListening();speak(transcript)}} type="button">
+                    {!isListening ? <Mic  className="hover:text-blue-600" /> : <MiniWaveform active={true}/>}
+                </button>
 
                 <button
                     onClick={

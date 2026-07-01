@@ -123,7 +123,7 @@ export default function ReportListPage() {
                             : "bg-[#13161f] border-[#1e2231] text-[#64748b] hover:border-[#2d3a4f] hover:text-slate-400"
                             }`}
                     >
-                        {f.label}
+                        {f?.label}
                     </button>
                 ))}
                 <div className="relative ml-auto">

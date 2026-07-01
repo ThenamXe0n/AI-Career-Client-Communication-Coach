@@ -10,7 +10,7 @@ export function Conversation({
 
     return (
         <div
-            className="
+            className="flex-1
       space-y-4
       "
         >

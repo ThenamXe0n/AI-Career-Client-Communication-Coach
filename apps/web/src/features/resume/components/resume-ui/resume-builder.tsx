@@ -1,11 +1,9 @@
 "use client"
-import { useState } from "react";
-import { BiMailSend } from "react-icons/bi";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { FaPhone } from "react-icons/fa6";
-import { TbWorldWww } from "react-icons/tb";
-import ResumePreview from "./ResumePreview";
+import { useEffect, useState } from "react";
 import ResumeTempleteSelector from "./resume-templete-selector";
+import { resumeTempletes } from "../../constants/resume-templete-data";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 
 // const INIT = {
 //   personal: {
@@ -116,6 +114,7 @@ import ResumeTempleteSelector from "./resume-templete-selector";
 const INIT = {
     personal: {
         name: "Nameet Mandwal",
+        role: "full stack AI Engineer",
         phone: "+91 8319850260",
         email: "thenameet0@gmail.com",
         location: "Indore, M.P.",
@@ -453,9 +452,6 @@ function AddBtn({ label, onClick }) {
     );
 }
 
-/* ── FONT TOKENS ── */
-const BITTER = "'Bitter', Georgia, serif";
-const OPENSANS = "'Open Sans', 'Segoe UI', sans-serif";
 
 // inject Google Fonts once into the page
 if (
@@ -479,6 +475,21 @@ export default function ResumeBuilderThree() {
     const [selectedTemplete, setSelectedTemplete] = useState(null)
     const [data, setData] = useState(INIT);
     const [tab, setTab] = useState("personal");
+    const { templeteId } = useParams()
+
+
+    useEffect(() => {
+
+        function getTemplete() {
+               const RT = resumeTempletes.find((i) => {
+                return i?.id == templeteId
+            })
+            setSelectedTemplete(RT)
+        }
+        getTemplete()
+    }, [templeteId])
+
+    console.log("param", selectedTemplete)
 
     const setP = (f, v) =>
         setData((d) => ({ ...d, personal: { ...d.personal, [f]: v } }));
@@ -690,6 +701,11 @@ export default function ResumeBuilderThree() {
                                     label="Full Name"
                                     value={data.personal.name}
                                     onChange={(v) => setP("name", v)}
+                                />
+                                <FInput
+                                    label="role"
+                                    value={data.personal.role}
+                                    onChange={(v) => setP("role", v)}
                                 />
                                 <div
                                     style={{
@@ -991,18 +1007,19 @@ export default function ResumeBuilderThree() {
                                 boxShadow: "0 0 5px #22c55e",
                             }}
                         />
+                        <Link href="/templete-selector" className="text-white hover:shadow-none duration-300 cursor-pointer bg-emerald-700 shadow-inner shadow-black/60 px-2 py-0.5 rounded-lg capitalize border-green-700 border-2">select another templete</Link>
                     </div>
-                    {selectedTemplete ? <div
+                    {selectedTemplete !== null ? <div
                         style={{
                             maxWidth: 800,
                             margin: "0 auto",
                             boxShadow: "0 6px 40px rgba(0,0,0,0.2)",
                         }}
                     >
-                        <ResumePreview d={data} />
+                        {selectedTemplete?.element(data)}
                     </div>
                         :
-                        <ResumeTempleteSelector setSelectedTemplete={setSelectedTemplete} />}
+                        <ResumeTempleteSelector  />}
                 </div>
             </div>
         </div>

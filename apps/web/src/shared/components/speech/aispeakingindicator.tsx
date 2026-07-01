@@ -18,7 +18,7 @@ interface AiSpeakingIndicatorProps {
 
 // ─── Mini waveform (used inside the pill variant) ────────────────────────────
 
-function MiniWaveform({ active, barCount = 4 }: { active: boolean; barCount?: number }) {
+export function MiniWaveform({ active, barCount = 4 }: { active: boolean; barCount?: number }) {
     const barsRef = useRef<(HTMLDivElement | null)[]>([]);
     const phasesRef = useRef<number[]>([0.2, 1.4, 2.6, 0.8, 1.9, 0.5].slice(0, barCount));
     const frameRef = useRef<number>(0);
@@ -58,7 +58,7 @@ function MiniWaveform({ active, barCount = 4 }: { active: boolean; barCount?: nu
 
 // ─── Breathing ring (used in both variants) ──────────────────────────────────
 
-function BreathingRing({ delay = 0, size = "inset-0" }: { delay?: number; size?: string }) {
+export function BreathingRing({ delay = 0, size = "inset-0" }: { delay?: number; size?: string }) {
     const ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {

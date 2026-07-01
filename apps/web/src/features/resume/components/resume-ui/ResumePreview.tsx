@@ -132,8 +132,7 @@ export default function ResumePreview({ d }) {
             marginBottom: 8,
           }}
         >
-          MERN Stack Developer · Full Stack JavaScript Developer · 2+ Years
-          Experience
+         {P.role || "your role"}
         </p>
 
         {/* row 1: links + phone */}

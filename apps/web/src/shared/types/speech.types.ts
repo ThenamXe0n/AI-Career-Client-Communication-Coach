@@ -7,3 +7,7 @@ export interface SpeechRecognitionOptions {
   continuous?: boolean;
   interimResults?: boolean;
 }
+
+export interface SpeechRecognitionResult {
+  transcript: string;
+}

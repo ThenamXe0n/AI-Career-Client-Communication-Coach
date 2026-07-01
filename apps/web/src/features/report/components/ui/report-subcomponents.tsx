@@ -123,14 +123,14 @@ export function ReportCard({ report }: { report: Report }) {
                         <Calendar size={12} />
                         {date}
                     </span>
-                    <span className={`inline-flex items-center gap-1.5 border rounded-full px-2.5 py-1 text-[11px] font-medium ${vc.pill}`}>
-                        <span className={`w-1.5 h-1.5 rounded-full ${vc.dot}`} />
-                        {vc.label}
+                    <span className={`inline-flex items-center gap-1.5 border rounded-full px-2.5 py-1 text-[11px] font-medium ${vc?.pill}`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${vc?.dot}`} />
+                        {vc?.label}
                     </span>
                 </div>
 
                 <div className="flex items-center gap-2 flex-wrap">
-                    <ActionButton icon={FileText} label="See report" colorClass="text-violet-400 hover:text-violet-300" onClick={() => router.push(`/report/${report.interviewId}`)} />
+                    <ActionButton icon={FileText} label="See report" colorClass="text-violet-400 hover:text-violet-300" onClick={() => router.push(`/report/${report?.interviewId}`)} />
                     <ActionButton icon={Lightbulb} label="Get suggestions" colorClass="text-teal-400 hover:text-teal-300" onClick={() => handleAction("suggest")} />
                     <ActionButton icon={BookOpen} label="Study material" colorClass="text-amber-400 hover:text-amber-300" onClick={() => handleAction("study")} />
                     <ActionButton icon={Compass} label="Topics to explore" colorClass="text-slate-400 hover:text-slate-200" onClick={() => handleAction("topics")} />

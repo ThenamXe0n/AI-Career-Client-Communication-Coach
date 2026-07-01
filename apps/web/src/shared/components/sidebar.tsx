@@ -144,9 +144,9 @@ export default function Sidebar() {
                         <BarChart2 className={iconClass("/report")} strokeWidth={1.75} />
                         <span>Reports</span>
                     </Link>
-                    <Link href="/resume-builder" onClick={() => setMobileOpen(false)} className={linkClass("/resume-builder")}>
-                        {pathname === "/resume-builder" && <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-emerald-400" />}
-                        <BarChart2 className={iconClass("/resume-builder")} strokeWidth={1.75} />
+                    <Link href="/templete-selector" onClick={() => setMobileOpen(false)} className={linkClass("/templete-selector")}>
+                        {pathname === "/templete-selector" && <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-emerald-400" />}
+                        <BarChart2 className={iconClass("/templete-selector")} strokeWidth={1.75} />
                         <span>Resume Builder</span>
                     </Link>
                 </nav>
@@ -163,7 +163,7 @@ export default function Sidebar() {
             <aside className={`hidden md:flex flex-col relative bg-[#000000] border-r border-[#1E2D45] min-h-screen p-5 transition-all duration-200 ease-in-out ${collapsed ? "w-[68px]" : "w-64"}`}>
 
                 {/* Logo */}
-                <div className={`flex items-center gap-3 mb-8 ${collapsed ? "justify-center" : ""}`}>
+                <Link href={"/"} className={`flex items-center gap-3 mb-8 ${collapsed ? "justify-center" : ""}`}>
                     <div className="w-9 h-9 rounded-lg bg-emerald-600/15 border border-emerald-500/30 flex items-center justify-center flex-shrink-0">
                         <BrainCircuit className="w-5 h-5 text-emerald-400" strokeWidth={1.75} />
                     </div>
@@ -177,7 +177,7 @@ export default function Sidebar() {
                             </p>
                         </div>
                     )}
-                </div>
+                </Link>
 
                 {!collapsed && (
                     <p className="px-1 mb-2 text-[10px] font-medium uppercase tracking-widest text-slate-600">
@@ -213,9 +213,9 @@ export default function Sidebar() {
                         {!collapsed && <span className="whitespace-nowrap">Reports</span>}
                         {collapsed && <span className="pointer-events-none absolute left-full ml-3 z-50 rounded-md bg-[#1E2D45] border border-[#253650] px-2.5 py-1 text-xs text-slate-200 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-150">Reports</span>}
                     </Link>
-                    <Link href="/resume-builder" className={linkClass("/resume-builder")}>
-                        {pathname === "/resume-builder" && !collapsed && <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-emerald-400" />}
-                        <File className={iconClass("/resume-builder")} strokeWidth={1.75} />
+                    <Link href="/templete-selector" className={linkClass("/templete-selector")}>
+                        {pathname === "/templete-selector" && !collapsed && <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full bg-emerald-400" />}
+                        <File className={iconClass("/templete-selector")} strokeWidth={1.75} />
                         {!collapsed && <span className="whitespace-nowrap">Resume Builder</span>}
                         {collapsed && <span className="pointer-events-none absolute left-full ml-3 z-50 rounded-md bg-[#1E2D45] border border-[#253650] px-2.5 py-1 text-xs text-slate-200 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-150">Resume Builder</span>}
                     </Link>
